@@ -1,14 +1,14 @@
 {
   "name": "discord-namer",
   "version": "1.0.0",
-  "description": "",
+  "description": "https://github.com/JasonEtco/discord-namer/pull/1/files",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jason Etcovitch <jasonetco@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.4.2",
