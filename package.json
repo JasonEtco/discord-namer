@@ -1,7 +1,7 @@
 {
   "name": "discord-namer",
   "version": "1.0.0",
-  "description": "https://github.com/JasonEtco/discord-namer/pull/1/files",
+  "description": "Changes the user's Discord nickname when they are @-mentioned, using a random emoji.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
