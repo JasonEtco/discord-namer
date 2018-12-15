@@ -6,7 +6,7 @@ const client = new Discord.Client()
 
 client.on('message', msg => {
   // Do nothing if the user wasn't mentioned
-  if (!msg.mentions.users.has(client.user)) return
+  if (!msg.mentions.users.has(client.user.id)) return
   // Get a random emoji
   const random = nemojis.random()
   // Change their nickname
