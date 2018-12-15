@@ -1,19 +1,18 @@
 {
   "name": "discord-namer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Changes the user's Discord nickname when they are @-mentioned, using a random emoji.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jason Etcovitch <jasonetco@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.4.2",
     "dotenv": "^6.0.0",
-    "get-value": "^3.0.1",
     "node-emoji": "^1.8.1"
   },
   "devDependencies": {
