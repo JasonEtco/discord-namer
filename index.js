@@ -9,7 +9,7 @@ client.on('message', msg => {
 
   const jason = msg.guild.me
   const random = nemojis.random()
-  return jason.setNickname(`${random.emoji}man`)
+  return msg.guild.me.setNickname(`${random.emoji}man`)
 })
 
 client.login(process.env.DISCORD_TOKEN)
