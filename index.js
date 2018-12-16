@@ -14,3 +14,6 @@ client.on('message', msg => {
 })
 
 client.login(process.env.DISCORD_TOKEN)
+
+// Needed for Now deployment to stay alive
+require('http').createServer().listen(3000)
