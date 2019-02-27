@@ -6,6 +6,12 @@ const client = new Discord.Client()
 
 const CUSTOM_NAME_REGEX = /^I\sam\s(.*)man$/
 
+async function changeName (msg, emoji) {
+  const newName = `${emoji}man`
+  console.log(`You shall henceforth be known as ${newName}`)
+  return msg.guild.me.setNickname(newName)
+}
+
 client.on('message', msg => {
   // I did it!
   if (msg.author.id === client.user.id) {
@@ -14,7 +20,7 @@ client.on('message', msg => {
     // No matches found
     if (!match) return
     // Change their nickname
-    return msg.guild.me.setNickname(`${match[1]}man`)
+    return changeName(match[1])
   }
 
   // The user wasn't mentioned
@@ -22,7 +28,7 @@ client.on('message', msg => {
     // Get a random emoji
     const random = nemojis.random()
     // Change their nickname
-    return msg.guild.me.setNickname(`${random.emoji}man`)
+    return changeName(random.emoji)
   }
 })
 
