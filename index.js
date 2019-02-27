@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 const nemojis = require('node-emoji')
 const client = new Discord.Client()
 
-const CUSTOM_NAME_REGEX = /^I\sam\s(?<emoji>.*)man$/
+const CUSTOM_NAME_REGEX = /^I\sam\s(.*)man$/
 
 client.on('message', msg => {
   // I did it!
@@ -12,9 +12,9 @@ client.on('message', msg => {
     // Will match `I am :emoji:man`
     const match = msg.cleanContent.match(CUSTOM_NAME_REGEX)
     // No matches found
-    if (!match || !match.groups.emoji) return
+    if (!match) return
     // Change their nickname
-    return msg.guild.me.setNickname(`${match.groups.emoji}man`)
+    return msg.guild.me.setNickname(`${match[1]}man`)
   }
 
   // The user wasn't mentioned
