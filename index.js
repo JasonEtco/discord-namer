@@ -17,13 +17,13 @@ client.on('message', msg => {
   if (msg.author.id === client.user.id) {
     // Will match `I am :emoji:man`
     const match = msg.cleanContent.match(CUSTOM_NAME_REGEX)
-    // No matches found
-    if (!match) return
-    // Change their nickname
-    return changeName(msg, match[1])
+    if (match) {
+      // Change their nickname
+      return changeName(msg, match[1])
+    }
   }
 
-  // The user wasn't mentioned
+  // The user was mentioned
   if (msg.mentions.users.has(client.user.id)) {
     // Get a random emoji
     const random = nemojis.random()
