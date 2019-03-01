@@ -20,7 +20,7 @@ client.on('message', msg => {
     // No matches found
     if (!match) return
     // Change their nickname
-    return changeName(match[1])
+    return changeName(msg, match[1])
   }
 
   // The user wasn't mentioned
@@ -28,7 +28,7 @@ client.on('message', msg => {
     // Get a random emoji
     const random = nemojis.random()
     // Change their nickname
-    return changeName(random.emoji)
+    return changeName(msg, random.emoji)
   }
 })
 
