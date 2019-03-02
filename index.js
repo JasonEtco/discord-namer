@@ -6,15 +6,22 @@ const client = new Discord.Client()
 
 const CUSTOM_NAME_REGEX = /^I\sam\s(.*)man$/
 
+/**
+ * @param {import('discord.js').Message} msg
+ * @param {string} emoji
+ */
 async function changeName (msg, emoji) {
   const newName = `${emoji}man`
   console.log(`You shall henceforth be known as ${newName}`)
   return msg.guild.me.setNickname(newName)
 }
 
-client.on('message', msg => {
+/**
+ * @param {import('discord.js').Message} msg
+ */
+async function handleMessage (msg) {
   // I did it!
-  if (msg.author.id === client.user.id) {
+  if (msg.author.id === msg.client.user.id) {
     // Will match `I am :emoji:man`
     const match = msg.cleanContent.match(CUSTOM_NAME_REGEX)
     if (match) {
@@ -24,12 +31,14 @@ client.on('message', msg => {
   }
 
   // The user was mentioned
-  if (msg.mentions.users.has(client.user.id)) {
+  if (msg.mentions.users.has(msg.client.user.id)) {
     // Get a random emoji
     const random = nemojis.random()
     // Change their nickname
     return changeName(msg, random.emoji)
   }
-})
+}
 
+client.on('message', handleMessage)
 client.login(process.env.DISCORD_TOKEN)
+module.exports = handleMessage
