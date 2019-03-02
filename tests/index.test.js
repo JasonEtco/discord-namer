@@ -1,3 +1,4 @@
+jest.mock('discord.js')
 const handleMessage = require('..')
 
 describe('handleMessage', () => {
