@@ -18,7 +18,7 @@ action "npm test" {
 
 action "codecov" {
   needs = "npm test"
-  uses = "docker://node:alpine"
+  uses = "docker://node"
   runs = "npx"
   args = "codecov"
   secrets = ["CODECOV_TOKEN"]
