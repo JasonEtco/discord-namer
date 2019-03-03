@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 const nemojis = require('node-emoji')
 const client = new Discord.Client()
 
-const CUSTOM_NAME_REGEX = /^I\sam\s(.*)man$/
+const CUSTOM_NAME_REGEX = /^I\sam\s(:\w+:)man$/
 
 /**
  * @param {import('discord.js').Message} msg
