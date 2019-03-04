@@ -12,7 +12,7 @@ const CUSTOM_NAME_REGEX = /^I\sam\s(:\w+:)man$/
  */
 async function changeName (msg, emoji) {
   const newName = `${emoji}man`
-  console.log(`You shall henceforth be known as ${newName}`)
+  console.log(`You shall henceforth be known as ${newName} on ${msg.guild.name}`)
   return msg.guild.me.setNickname(newName)
 }
 
