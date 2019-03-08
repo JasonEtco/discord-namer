@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 const nemojis = require('node-emoji')
 const client = new Discord.Client()
 
-const CUSTOM_NAME_REGEX = /^I\sam\s(:\w+:)man$/
+const CUSTOM_NAME_REGEX = /^I\sam\s([^\s]+)man$/
 
 /**
  * @param {import('discord.js').Message} msg
@@ -40,5 +40,7 @@ async function handleMessage (msg) {
 }
 
 client.on('message', handleMessage)
-client.login(process.env.DISCORD_TOKEN)
+client.login(process.env.DISCORD_TOKEN).then(() => {
+  console.log(`Ready to rename you ${client.user.username} 👂`)
+})
 module.exports = handleMessage
