@@ -1,8 +1,16 @@
 jest.mock('discord.js')
-const handleMessage = require('..')
+const Discord = require('discord.js')
+
+Discord.Client = class {
+  constructor () {
+    this.user = { username: 'test-runner' }
+    this.login = jest.fn(() => Promise.resolve({}))
+    this.on = jest.fn()
+  }
+}
 
 describe('handleMessage', () => {
-  let msg
+  let msg, handleMessage
 
   beforeEach(() => {
     msg = {
@@ -24,6 +32,8 @@ describe('handleMessage', () => {
     }
 
     console.log = jest.fn()
+
+    handleMessage = require('..')
   })
 
   it('sets the nickname on an @mention', async () => {
@@ -41,6 +51,15 @@ describe('handleMessage', () => {
   it('sets the nickname when the client says "I am ___man"', async () => {
     msg.author.id = msg.client.user.id
     const newName = ':jason:man'
+    msg.cleanContent = `I am ${newName}`
+    await handleMessage(msg)
+    expect(msg.guild.me.setNickname).toHaveBeenCalled()
+    expect(msg.guild.me.setNickname).toHaveBeenCalledWith(newName)
+  })
+
+  it('sets the nickname when the client says "I am ___man" with a real emoji', async () => {
+    msg.author.id = msg.client.user.id
+    const newName = '🤖man'
     msg.cleanContent = `I am ${newName}`
     await handleMessage(msg)
     expect(msg.guild.me.setNickname).toHaveBeenCalled()
