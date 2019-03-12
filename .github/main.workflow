@@ -3,21 +3,14 @@ workflow "Test my code" {
   resolves = ["codecov"]
 }
 
-action "npm ci" {
-  uses = "docker://node:10-alpine"
+action "npm cit" {
+  uses = "docker://node:lts-alpine"
   runs = "npm"
-  args = "ci"
-}
-
-action "npm test" {
-  needs = "npm ci"
-  uses = "docker://node:10-alpine"
-  runs = "npm"
-  args = "test"
+  args = "cit"
 }
 
 action "codecov" {
-  needs = "npm test"
+  needs = "npm cit"
   uses = "docker://node:10"
   runs = "npx"
   args = "codecov"
