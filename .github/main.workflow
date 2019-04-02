@@ -11,7 +11,7 @@ action "npm cit" {
 
 action "codecov" {
   needs = "npm cit"
-  uses = "docker://node:10"
+  uses = "docker://node:lts-alpine"
   runs = "npx"
   args = "codecov"
   secrets = ["CODECOV_TOKEN"]
