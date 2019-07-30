@@ -20,6 +20,13 @@ async function changeName (msg, emoji) {
  * @param {import('discord.js').Message} msg
  */
 async function handleMessage (msg) {
+  // If there's a list of allowed servers
+  if (process.env.ALLOWED_SERVERS) {
+    // Check that this server is in the list
+    const allowed = process.env.ALLOWED_SERVERS.split(',')
+    if (allowed.includes(msg.guild.name)) return
+  }
+
   // I did it!
   if (msg.author.id === msg.client.user.id) {
     // Will match `I am :emoji:man`
