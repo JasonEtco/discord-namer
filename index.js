@@ -24,7 +24,7 @@ async function handleMessage (msg) {
   if (process.env.ALLOWED_SERVERS) {
     // Check that this server is in the list
     const allowed = process.env.ALLOWED_SERVERS.split(',')
-    if (allowed.includes(msg.guild.name)) return
+    if (!allowed.includes(msg.guild.name)) return
   }
 
   // I did it!
