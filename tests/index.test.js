@@ -1,4 +1,5 @@
 jest.mock('discord.js')
+jest.mock('dotenv')
 const Discord = require('discord.js')
 
 Discord.Client = class {
@@ -18,6 +19,7 @@ describe('handleMessage', () => {
         users: new Set()
       },
       guild: {
+        name: 'dope-server',
         me: {
           setNickname: jest.fn()
         }
@@ -40,6 +42,22 @@ describe('handleMessage', () => {
     msg.mentions.users.add(msg.client.user.id)
     await handleMessage(msg)
     expect(msg.guild.me.setNickname).toHaveBeenCalled()
+  })
+
+  it('ignores activity in non-allowed servers', async () => {
+    process.env.ALLOWED_SERVERS = 'nope'
+    msg.mentions.users.add(msg.client.user.id)
+    await handleMessage(msg)
+    expect(msg.guild.me.setNickname).not.toHaveBeenCalled()
+    delete process.env.ALLOWED_SERVERS
+  })
+
+  it('sets the nickname in allowed servers', async () => {
+    process.env.ALLOWED_SERVERS = msg.guild.name
+    msg.mentions.users.add(msg.client.user.id)
+    await handleMessage(msg)
+    expect(msg.guild.me.setNickname).toHaveBeenCalled()
+    delete process.env.ALLOWED_SERVERS
   })
 
   it('ignores @mentions for other users', async () => {
