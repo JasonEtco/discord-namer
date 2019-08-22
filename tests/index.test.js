@@ -19,6 +19,7 @@ describe('handleMessage', () => {
         users: new Set()
       },
       guild: {
+        id: 123,
         name: 'dope-server',
         me: {
           setNickname: jest.fn()
@@ -45,7 +46,7 @@ describe('handleMessage', () => {
   })
 
   it('ignores activity in non-allowed servers', async () => {
-    process.env.ALLOWED_SERVERS = 'nope'
+    process.env.ALLOWED_SERVERS = '1234'
     msg.mentions.users.add(msg.client.user.id)
     await handleMessage(msg)
     expect(msg.guild.me.setNickname).not.toHaveBeenCalled()
@@ -53,7 +54,7 @@ describe('handleMessage', () => {
   })
 
   it('sets the nickname in allowed servers', async () => {
-    process.env.ALLOWED_SERVERS = msg.guild.name
+    process.env.ALLOWED_SERVERS = msg.guild.id.toString()
     msg.mentions.users.add(msg.client.user.id)
     await handleMessage(msg)
     expect(msg.guild.me.setNickname).toHaveBeenCalled()
