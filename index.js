@@ -20,6 +20,9 @@ async function changeName (msg, emoji) {
  * @param {import('discord.js').Message} msg
  */
 async function handleMessage (msg) {
+  // Don't do anything unless there's a guild
+  if (!msg.guild) return
+
   // If there's a list of allowed servers
   if (process.env.ALLOWED_SERVERS) {
     // Check that this server is in the list

@@ -91,4 +91,11 @@ describe('handleMessage', () => {
     await handleMessage(msg)
     expect(msg.guild.me.setNickname).not.toHaveBeenCalled()
   })
+
+  it('ignores messages without a guild', async () => {
+    msg.mentions.users.add(msg.client.user.id)
+    delete msg.guild
+    const result = await handleMessage(msg)
+    expect(result).toBeUndefined()
+  })
 })
