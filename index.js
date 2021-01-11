@@ -1,10 +1,26 @@
 require('dotenv').config()
 
 const Discord = require('discord.js')
-const nemojis = require('node-emoji')
+const rawEmojis = require('node-emoji/lib/emoji.json')
+
+const emojis = Object.keys(rawEmojis)
+  .filter(k => !k.startsWith('flag-'))
+  .reduce((obj, key) => {
+    obj[key] = nemojis[key]
+    return obj
+  }, {})
+
+const emojiKeys = Object.keys(emojis)
+
 const client = new Discord.Client()
 
 const CUSTOM_NAME_REGEX = /^I\sam\s([^\s]+)man$/
+
+function randomEmoji () {
+  const randomIndex = Math.floor(Math.random() * emojiKeys.length)
+  const key = emojiKeys[randomIndex]
+  return emojis[key]
+}
 
 /**
  * @param {import('discord.js').Message} msg
@@ -43,9 +59,9 @@ async function handleMessage (msg) {
   // The user was mentioned
   if (msg.mentions.users.has(msg.client.user.id)) {
     // Get a random emoji
-    const random = nemojis.random()
+    const random = randomEmoji()
     // Change their nickname
-    return changeName(msg, random.emoji)
+    return changeName(msg, random)
   }
 }
 
