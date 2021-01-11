@@ -6,7 +6,7 @@ const rawEmojis = require('node-emoji/lib/emoji.json')
 const emojis = Object.keys(rawEmojis)
   .filter(k => !k.startsWith('flag-'))
   .reduce((obj, key) => {
-    obj[key] = nemojis[key]
+    obj[key] = rawEmojis[key]
     return obj
   }, {})
 
